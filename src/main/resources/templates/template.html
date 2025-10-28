@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificate of Incorporation (Private Company Limited by Shares)</title>
+</head>
+
+<style>
+    @font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('./fonts/CormorantGaramond-VariableFont_wght.ttf') format('truetype'),
+         url('./fonts/CormorantGaramond-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./fonts/Montserrat-VariableFont_wght.ttf') format('truetype'),
+         url('./fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 300 700;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f9f9f9;
+    color: #2c3e50;
+    line-height: 1.5;
+    padding: 20px;
+    position: relative;
+}
+
+.container {
+    max-width: 210mm;
+    margin: 0 auto;
+    position: relative;
+    height: 297mm;
+    width: 210mm;
+}
+
+.page {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto 30px;
+    padding: 20mm;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.watermark {
+    position: absolute;
+    top: 380px;
+    left: -10px;
+    transform: rotate(-30deg);
+    font-size: 32px;
+    font-weight: 700;
+    color: rgba(43, 38, 105, 0.08);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1;
+    font-family: "Cormorant Garamond", serif;
+    letter-spacing: 2px;
+}
+
+.top-section {
+    position: relative;
+    z-index: 2;
+}
+
+.registration-info {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.reg-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.reg-label {
+    font-weight: 600;
+    font-size: 12px;
+    color: #2c3e50;
+    margin-right: 10px;
+}
+
+.reg-value {
+    display: inline-block;
+    min-width: 150px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.header {
+    margin: 10px 0 15px 0;
+    position: relative;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+    font-size: smaller;
+}
+
+.registry-logo {
+    width: 80px;
+    height: 80px;
+    display: grid;
+    place-items: center;
+    justify-self: flex-start;
+    aspect-ratio: 1/1;
+}
+
+.ghana-emblem {
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    display: grid;
+    grid-column: 1fr;
+    gap: 2px;
+    aspect-ratio: 1/1;
+}
+
+.registry-logo img {
+    width: auto;
+    object-fit: contain;
+    filter: brightness(1.6) contrast(1.3) saturate(1.2);
+}
+
+.ghana-emblem img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+.emblem-text {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    color: #7f8c8d;
+    margin-top: -2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.title-section {
+    text-align: center;
+    margin: 15px 0 25px 0;
+}
+
+.certificate-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    color: #2c3e50;
+    font-family: "Cormorant Garamond", serif;
+}
+
+.certificate-subtitle {
+    font-size: 14px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px 0 15px;
+}
+
+.divider span {
+    display: block;
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+}
+
+.act-reference {
+    font-size: 13px;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    font-style: italic;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: center;
+    width: 100%;
+}
+
+.certification-statement {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    color: #2c3e50;
+}
+
+.bottom-section {
+    padding-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.content {
+    margin: 20px 0;
+}
+
+.company-field {
+    margin: 90px 0 0;
+    text-align: center;
+}
+
+.company-name {
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.blank-line {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid rgba(44, 62, 80, 0.3);
+    margin: 12px 0;
+    height: 1px;
+}
+
+.resolution-text {
+    margin: 15px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.unlimited-highlight {
+    color: #e67e22;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.company-details {
+    margin: 20px 0;
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 5px;
+}
+
+.label {
+    font-weight: bold;
+    color: #2b2669;
+    min-width: 200px;
+}
+
+.value {
+    color: #333;
+    flex-grow: 1;
+    text-align: right;
+}
+
+.date-section {
+    text-align: center;
+    margin: 50px 0;
+    font-size: 15px;
+}
+
+.date-label {
+    color: #2c3e50;
+}
+
+.date-field {
+    font-weight: 600;
+    color: #e67e22;
+    margin: 0 5px;
+}
+
+.bottom-layout {
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.signature-section {
+    float: right;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.signature-line {
+    width: 350px;
+    height: 0;
+    border-top: 2px dotted #2c3e50;
+    margin-bottom: 10px;
+}
+
+.signature-title {
+    font-size: 12px;
+    text-align: center;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.official-seal {
+    width: 120px;
+    height: 120px;
+    opacity: 1;
+    position: relative;
+}
+
+.seal-circle {
+    width: 110px;
+    height: 110px;
+    border: 2px solid rgba(212, 175, 55, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.seal-circle::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 50%;
+    top: -10px;
+    left: -10px;
+}
+
+.seal-inner {
+    width: 90px;
+    height: 90px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 25px;
+}
+
+.seal-text {
+    color: rgba(212, 175, 55, 0.8);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: "Cormorant Garamond", serif;
+    display: block;
+    margin: 0 0 3px 0;
+    line-height: 1.0;
+}
+
+.seal-date {
+    color: rgba(212, 175, 55, 0.6);
+    font-size: 7px;
+    display: block;
+    margin: 0;
+    text-align: center;
+    line-height: 1.0;
+    letter-spacing: 0.3px;
+}
+
+.corner-decoration {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-color: #d4af37;
+    opacity: 0.6;
+    z-index: 10;
+}
+
+.top-left {
+    top: 2mm;
+    left: 2mm;
+    border-top: 2px solid;
+    border-left: 2px solid;
+}
+
+.top-right {
+    top: 2mm;
+    right: 2mm;
+    border-top: 2px solid;
+    border-right: 2px solid;
+}
+
+.bottom-left {
+    bottom: 2mm;
+    left: 2mm;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+}
+
+.bottom-right {
+    bottom: 2mm;
+    right: 2mm;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+}
+
+.qr-code-container {
+    text-align: center;
+    margin-top: auto;
+    margin-left: auto;
+    width: 120px;
+}
+
+.qr-code {
+    width: 80px;
+    height: 100px;
+    margin-left: auto;
+}
+
+.qr-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border: 1px solid #e0e0e0;
+}
+
+.qr-label {
+    font-size: 8px;
+    color: #7f8c8d;
+    margin-top: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+@media print {
+    body {
+        background: none;
+        padding: 0;
+        margin: 0;
+        width: 210mm;
+        height: 297mm;
+    }
+
+    .container {
+        width: 210mm;
+        height: 297mm;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        page-break-after: always;
+    }
+
+    .controls {
+        display: none;
+    }
+}
+
+.ptnr-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #2c3e50;
+    text-transform: capitalize;
+}
+
+.ptnr-section {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ptnr-names {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+.ptnr-text {
+    font-family: "Cormorant Garamond", serif;
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="page" id="page1">
+            <!-- Watermark -->
+            <div class="watermark">OFFICE OF THE REGISTRAR OF COMPANIES</div>
+
+            <!-- Top Section (Header) -->
+            <div class="top-section">
+                <div class="registration-info">
+                    <div class="reg-item">
+                        <span class="reg-label">Reg No.</span>
+                        <span class="reg-value"
+                            th:text="${registrationNumber != null ? registrationNumber : 'N/A'}">PL000001025</span>
+                    </div>
+                </div>
+
+                <div class="header">
+                    <!-- Registry logo (left side) -->
+                    <div class="registry-logo" th:if="${orcLogoData}">
+                        <img th:src="${orcLogoData}" alt="Registry Logo" class="logo" />
+                    </div>
+
+                    <!-- Ghana Coat of Arms (right side) -->
+                    <div class="ghana-emblem" th:if="${coaImageData}">
+                        <img th:src="${coaImageData}" alt="Coat of Arms of Ghana" class="ghana-logo" />
+                        <span class="emblem-text">REPUBLIC OF GHANA</span>
+                    </div>
+                </div>
+
+                <div class="title-section">
+                    <h1 class="certificate-title">Certificate of Incorporation</h1>
+                    <div class="divider"><span></span></div>
+                    <p class="act-reference">
+                        Companies Act, 2019 (Act 992)
+                    </p>
+                    <p class="certification-statement">I hereby certify that</p>
+                </div>
+            </div>
+
+            <!-- Bottom Section (Content) -->
+            <div class="bottom-section">
+                <div class="content">
+                    <div class="company-field">
+                        <span class="company-name" th:text="${legalName != null ? legalName : 'N/A'}">SAMPLE COMPANY
+                            LIMITED</span>
+                        <div class="blank-line"></div>
+                    </div>
+
+                    <p class="resolution-text">
+                        is this day incorporated under the Companies Act, 2019 (Act 992) as a
+                        <strong>Private Company Limited by Shares</strong> and that the liability of the
+                        members is limited by shares.
+                    </p>
+
+
+                    <div class="date-section">
+                        <span class="date-label">Given under my hand at Accra, this</span>
+                        <span class="date-field" th:text="${#temporals.format(#temporals.createNow(), 'dd')}">Day</span>
+                        <span class="date-label">day of</span>
+                        <span class="date-field" th:text="${#temporals.format(#temporals.createNow(), 'MMMM')}">Month</span>
+                        <span class="date-field" th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">Year</span>.
+                    </div>
+
+                    <!-- Bottom layout with seal and signature -->
+                    <div class="bottom-layout">
+                        <div class="official-seal show">
+                            <div class="seal-circle">
+                                <div class="seal-inner">
+                                    <div class="seal-text">OFFICIAL SEAL</div>
+                                    <div class="seal-date">REGISTRAR OF COMPANIES</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="signature-section">
+                            <div class="signature-line"></div>
+                            <p class="signature-title">Registrar of Companies, Ghana</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="qr-code-container">
+                <div class="qr-code" th:if="${qrCodeData}">
+                    <img th:src="${qrCodeData}" alt="Document Verification QR Code" class="qr-image"/>
+                    <div class="qr-label">Scan to Verify</div>
+                </div>
+            </div>
+            <!-- Corner decorations -->
+            <div class="corner-decoration top-left"></div>
+            <div class="corner-decoration top-right"></div>
+            <div class="corner-decoration bottom-left"></div>
+            <div class="corner-decoration bottom-right"></div>
+        </div>
+    </div>
+</body>
+</html>
